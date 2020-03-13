@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AnimationStudies</string>
+    <string name="value_animator_demo_tv">I\'m animated!</string>
+</resources>
