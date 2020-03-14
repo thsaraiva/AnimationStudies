@@ -1,7 +1,7 @@
 package com.example.animationstudies
 
 import android.animation.Animator
-import android.animation.Animator.AnimatorListener
+import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.os.Bundle
@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity() {
     private fun animateUsingObjectAnimator(): ObjectAnimator {
         return ObjectAnimator.ofFloat(textview2, "translationX", 500f).apply {
             duration = 3000
+//            AnimatorSet().play(this).with(ObjectAnimator.ofInt(textview2, "TextColor", 0x000000, 0xFF0000).apply {
+//                duration = 3000
+//                addUpdateListener { textview2.invalidate() }
+//            })
 //            start()
         }
     }
@@ -37,23 +41,10 @@ class MainActivity : AppCompatActivity() {
             start()
         }
 
-        animator.addListener(object : AnimatorListener {
-            override fun onAnimationRepeat(animation: Animator?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
+        animator.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
                 objAnimator.start()
             }
-
-            override fun onAnimationCancel(animation: Animator?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onAnimationStart(animation: Animator?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
         })
 
         animator.addUpdateListener {
@@ -65,7 +56,9 @@ class MainActivity : AppCompatActivity() {
 
             with(it.animatedValue as Float) {
                 textview1.translationX = this
-                textview1.setTextColor(this.toInt())
+//                textview1.setTextColor(this.toInt())
+//                textview1.invalidate()
+
             }
         }
     }
